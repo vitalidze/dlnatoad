@@ -14,11 +14,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import com.vaguehope.dlnatoad.util.TmpFolder;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 import org.teleal.cling.support.model.container.Container;
 import org.teleal.cling.support.model.item.Item;
 
@@ -30,7 +30,7 @@ public class MediaIndexTest {
 
 	private static final String EXTERNAL_HTTP_CONTEXT = "http://foo:123";
 
-	@Rule public TemporaryFolder tmp = new TemporaryFolder();
+	@Rule public TmpFolder tmp = new TmpFolder();
 
 	private ContentTree contentTree;
 	private MediaIndex undertest;

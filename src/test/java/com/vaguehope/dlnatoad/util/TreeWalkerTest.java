@@ -13,14 +13,13 @@ import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 import org.mockito.InOrder;
 
 import com.vaguehope.dlnatoad.util.TreeWalker.Hiker;
 
 public class TreeWalkerTest {
 
-	@Rule public TemporaryFolder tmp = new TemporaryFolder();
+	@Rule public TmpFolder tmp = new TmpFolder();
 
 	@Test
 	public void itWalksTree () throws Exception {
