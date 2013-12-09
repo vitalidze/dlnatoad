@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.io.FilenameUtils;
-
 import com.vaguehope.dlnatoad.dlnaserver.ContentGroup;
 
 public enum MediaFormat {
@@ -57,8 +55,12 @@ public enum MediaFormat {
 	}
 
 	public static MediaFormat identify (final File file) {
-		return EXT_TO_FORMAT.get(FilenameUtils.getExtension(file.getName()).toLowerCase());
+		return EXT_TO_FORMAT.get(getExtension(file.getName()).toLowerCase());
 	}
+
+    private static String getExtension(String fileName) {
+        return fileName.substring(fileName.lastIndexOf('.') + 1);
+    }
 
 	private static class MediaFileFilter implements FileFilter {
 

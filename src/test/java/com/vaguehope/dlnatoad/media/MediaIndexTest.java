@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.List;
 
 import com.vaguehope.dlnatoad.util.TmpFolder;
-import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -139,7 +138,7 @@ public class MediaIndexTest {
 		File file2 = mockFile("file_b.mkv", dir);
 
 		this.undertest.refresh();
-		FileUtils.deleteDirectory(dir);
+        delete(dir);
 		this.undertest.refresh();
 
 		List<File> actualFiles = getFiles(this.contentTree.getNodes());
@@ -170,8 +169,11 @@ public class MediaIndexTest {
 	}
 
 	private static File mockFile (final String name, final File parent) throws IOException {
+        if (!parent.exists()) {
+            parent.mkdirs();
+        }
 		File f = new File(parent, name);
-		FileUtils.touch(f);
+		f.createNewFile();
 		return f;
 	}
 
@@ -239,4 +241,11 @@ public class MediaIndexTest {
 		assertEquals(expectedFiles, actualFiles);
 	}
 
+    private static void delete(File dir) {
+        if (!dir.delete() && dir.isDirectory()) {
+            for (File file : dir.listFiles()) {
+                delete(file);
+            }
+        }
+    }
 }
